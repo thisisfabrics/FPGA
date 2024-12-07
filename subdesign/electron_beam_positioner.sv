@@ -1,20 +1,22 @@
 module electron_beam_positioner(
 	input clock,
 	input reset,
+
 	output logic [1:0][10:0] instantaneous_beam_position,
 	output logic beam2left_signal,
 	output logic beam2top_signal
 );
 
-logic is_ray_enabled = 0;
+logic is_ray_enabled;
 logic illustration;
 
-always_ff @ (posedge clock or negedge reset) begin
-	if (~reset) begin 
+always_ff @ (posedge clock or posedge reset) begin
+	if (reset) begin 
 		instantaneous_beam_position[0] <= '0;
 		instantaneous_beam_position[1] <= '0;
-		beam2left_signal <= 0;
-		beam2top_signal <= 0;
+		beam2left_signal <= 1'b0;
+		beam2top_signal <= 1'b0;
+		is_ray_enabled <= 1'b0;
 	end else begin
 		if (instantaneous_beam_position[0] == 0) begin
 			beam2left_signal <= 1;

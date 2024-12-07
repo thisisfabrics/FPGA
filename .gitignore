@@ -1,6 +1,14 @@
+# Quartus Prime
 db
 incremental_db
 output_files
+fpga.qws
 *.bak
+
+# Icarus Verilog
+log.txt
+dump.vcd
+
+# Python
 venv
 .venv
